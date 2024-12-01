@@ -1,0 +1,6 @@
+requests
+matplotlib
+numpy
+python-dotenv
+midea-inventor-lib
+hashlib
