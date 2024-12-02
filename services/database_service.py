@@ -1,7 +1,11 @@
 from datetime import datetime
 from modules.database_setup import Device, Room, Measurement, SessionLocal
 from sqlalchemy import func
+import logging
+from pytz import timezone
 
+
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
 class DatabaseService:
     def __init__(self):
         self.db = SessionLocal()
@@ -78,6 +82,30 @@ class DatabaseService:
             .order_by(Measurement.timestamp.desc())
             .first()
         )
+    
+
+    def get_measurements_for_room(self, room_id, start_time, end_time):
+        """
+        Holt alle Messwerte für einen bestimmten Raum im angegebenen Zeitraum.
+        """
+        try:
+            # Konvertiere die Zeiten in UTC für die Abfrage
+            start_time = start_time.astimezone(timezone('UTC'))
+            end_time = end_time.astimezone(timezone('UTC'))
+
+            logging.debug(f"Querying measurements for room {room_id} between {start_time} and {end_time}")
+
+            return (
+                self.db.query(Measurement)
+                .filter(Measurement.room_id == room_id)
+                .filter(Measurement.timestamp >= start_time)
+                .filter(Measurement.timestamp <= end_time)
+                .order_by(Measurement.timestamp)
+                .all()
+            )
+        except Exception as e:
+            logging.error(f"Error retrieving measurements for room {room_id}: {e}")
+            return []
 
     def get_all_measurements(self, room_id, sorting="timestamp", order="asc", count=None, offset=0):
         query = self.db.query(Measurement).filter_by(room_id=room_id)

@@ -14,8 +14,6 @@ DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 DEHUMIDIFIER_EMAIL = os.getenv("DEHUMIDIFIER_EMAIL")
 DEHUMIDIFIER_PASSWORD = os.getenv("DEHUMIDIFIER_PASSWORD")
 
-print(f"Using DATABASE_URL: {DATABASE_URL}")
-logging.info(f"Using DATABASE_URL: {DATABASE_URL}")
 
 # Logging setup
 logging.basicConfig(

@@ -226,37 +226,89 @@ paths:
           description: Gerät nicht gefunden.
         '500':
           description: Fehler beim Löschen des Geräts.
-  /measurements/{room_id}:
-    get:
-      summary: Messungen für einen Raum abrufen
-      parameters:
-        - name: room_id
-          in: path
-          required: true
-          schema:
-            type: integer
-        - name: sorting
-          in: query
-          schema:
-            type: string
-        - name: order
-          in: query
-          schema:
-            type: string
-            enum: [asc, desc]
-        - name: count
-          in: query
-          schema:
-            type: integer
-        - name: offset
-          in: query
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Messungen erfolgreich abgerufen.
-        '500':
-          description: Fehler beim Abrufen der Messungen.
+/measurements/{room_id}:
+  get:
+    summary: Messungen für einen Raum abrufen
+    parameters:
+      - name: room_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: sorting
+        in: query
+        schema:
+          type: string
+        description: Feld, nach dem die Ergebnisse sortiert werden sollen (Standard: timestamp)
+      - name: order
+        in: query
+        schema:
+          type: string
+          enum: [asc, desc]
+        description: Sortierreihenfolge (aufsteigend oder absteigend, Standard: asc)
+      - name: count
+        in: query
+        schema:
+          type: integer
+        description: Maximale Anzahl der zurückzugebenden Ergebnisse
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Anzahl der zu überspringenden Ergebnisse
+      - name: start_date
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Startdatum für die Filterung der Ergebnisse (YYYY-MM-DD)
+      - name: end_date
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Enddatum für die Filterung der Ergebnisse (YYYY-MM-DD)
+    responses:
+      '200':
+        description: Messungen erfolgreich abgerufen.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                measurements:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      timestamp:
+                        type: string
+                        format: date-time
+                      temperature:
+                        type: number
+                      humidity:
+                        type: number
+                totalCount:
+                  type: integer
+                firstDate:
+                  type: string
+                  format: date-time
+                  nullable: true
+                lastDate:
+                  type: string
+                  format: date-time
+                  nullable: true
+      '500':
+        description: Fehler beim Abrufen der Messungen.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
     delete:
       summary: Alle Messungen eines Raumes löschen
       parameters:
@@ -288,3 +340,94 @@ paths:
           description: Shelly-Daten erfolgreich gespeichert.
         '500':
           description: Fehler beim Abrufen und Speichern der Shelly-Daten.
+  /ventilation_analysis/{room_id}:
+    get:
+      summary: Abrufen von Lüftungsempfehlungen für einen Raum
+      parameters:
+        - name: room_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID des Raumes, für den die Lüftungsanalyse durchgeführt werden soll
+        - name: interval_minutes
+          in: query
+          schema:
+            type: integer
+          description: "Zeitraum in Minuten für die Analyse (Standard: 60 Minuten)"
+        - name: start_time
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: "Startzeit für die Analyse im ISO-Format (Standard: Endzeit - Zeitraum)"
+        - name: end_time
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: "Endzeit für die Analyse im ISO-Format (Standard: aktuelle Zeit)"
+      responses:
+        '200':
+          description: Lüftungsempfehlung erfolgreich abgerufen.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  room_id:
+                    type: integer
+                  start_time:
+                    type: string
+                    format: date-time
+                  end_time:
+                    type: string
+                    format: date-time
+                  trend:
+                    type: string
+                    description: Aktueller Trend der Luftfeuchtigkeit (z.B. "increasing" oder "decreasing")
+                  recommendation:
+                    type: object
+                    properties:
+                      action:
+                        type: string
+                        description: Empfohlene Maßnahme basierend auf der Analyse
+                      current_trend:
+                        type: string
+                        description: Aktueller Trend der Luftfeuchtigkeit
+                      maximum_humidity:
+                        type: number
+                        nullable: true
+                        description: Maximale Luftfeuchtigkeit im analysierten Zeitraum (nur bei steigendem Trend)
+                      time_of_maximum:
+                        type: string
+                        format: date-time
+                        nullable: true
+                        description: Zeitpunkt der maximalen Luftfeuchtigkeit (nur bei steigendem Trend)
+                      minimum_humidity:
+                        type: number
+                        nullable: true
+                        description: Minimale Luftfeuchtigkeit im analysierten Zeitraum (nur bei fallendem Trend)
+                      time_of_minimum:
+                        type: string
+                        format: date-time
+                        nullable: true
+                        description: Zeitpunkt der minimalen Luftfeuchtigkeit (nur bei fallendem Trend)
+        '404':
+          description: Keine Messwerte für den angegebenen Zeitraum verfügbar.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Fehler bei der Analyse der Lüftung.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

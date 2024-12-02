@@ -1,0 +1,398 @@
+2024-12-02 20:57:09,262 - INFO - Weather thread started.
+2024-12-02 20:57:09,263 - INFO - Shelly thread started.
+2024-12-02 20:57:09,269 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 20:57:09,269 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 20:57:09,309 - INFO - Weather data saved successfully.
+2024-12-02 20:57:10,514 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 20:57:10,564 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 20:57:12,152 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:12] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 20:57:12,169 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:12] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 20:57:12,169 - WARNING - No measurements available for room 3.
+2024-12-02 20:57:12,169 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:12] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 20:57:12,173 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:12] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 20:57:12,173 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:12] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 20:57:48,205 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:48] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 20:57:48,219 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:48] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 20:57:48,220 - WARNING - No measurements available for room 3.
+2024-12-02 20:57:48,220 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:48] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 20:57:48,223 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:48] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 20:57:48,224 - INFO - 127.0.0.1 - - [02/Dec/2024 20:57:48] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 20:58:02,695 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:02] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 20:58:02,701 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:02] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 20:58:02,703 - WARNING - No measurements available for room 3.
+2024-12-02 20:58:02,703 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:02] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 20:58:02,706 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:02] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 20:58:02,707 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:02] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 20:58:09,392 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:09] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 20:58:09,401 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:09] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 20:58:09,405 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:09] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 20:58:10,786 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 20:58:10,877 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 20:58:24,165 - INFO - Weather thread started.
+2024-12-02 20:58:24,166 - INFO - Shelly thread started.
+2024-12-02 20:58:24,172 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 20:58:24,172 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 20:58:24,220 - INFO - Weather data saved successfully.
+2024-12-02 20:58:24,383 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 20:58:24,524 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 20:58:26,500 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:26] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 20:58:26,509 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:26] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 20:58:26,510 - WARNING - No measurements available for room 3.
+2024-12-02 20:58:26,511 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:26] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 20:58:26,513 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:26] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 20:58:26,514 - INFO - 127.0.0.1 - - [02/Dec/2024 20:58:26] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 20:59:03,658 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:03] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 20:59:03,665 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:03] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 20:59:03,668 - WARNING - No measurements available for room 3.
+2024-12-02 20:59:03,668 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:03] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 20:59:03,670 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:03] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 20:59:03,671 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:03] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 20:59:24,734 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 20:59:24,816 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 20:59:40,382 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:40] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 20:59:40,394 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:40] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 20:59:40,396 - WARNING - No measurements available for room 3.
+2024-12-02 20:59:40,396 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:40] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 20:59:40,400 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:40] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 20:59:40,401 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:40] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 20:59:48,958 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:48] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 20:59:48,966 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:48] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 20:59:48,967 - INFO - 127.0.0.1 - - [02/Dec/2024 20:59:48] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:15,719 - INFO - Weather thread started.
+2024-12-02 21:00:15,720 - INFO - Shelly thread started.
+2024-12-02 21:00:15,727 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 21:00:15,727 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 21:00:15,766 - INFO - Weather data saved successfully.
+2024-12-02 21:00:15,913 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:00:16,027 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:00:17,613 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:17] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:17,635 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:17] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:17,636 - WARNING - No measurements available for room 3.
+2024-12-02 21:00:17,637 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:17] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:00:17,639 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:17] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:17,640 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:17] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:00:18,485 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:18] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:18,505 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:18] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:18,508 - WARNING - No measurements available for room 3.
+2024-12-02 21:00:18,508 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:18] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:00:18,510 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:18] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:18,512 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:18] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:00:19,190 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:19] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:19,210 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:19] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:19,212 - WARNING - No measurements available for room 3.
+2024-12-02 21:00:19,213 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:19] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:00:19,215 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:19] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:00:19,216 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:19] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:19,948 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:19] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:20,004 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:20] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:20,010 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:20] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:29,620 - INFO - Weather thread started.
+2024-12-02 21:00:29,621 - INFO - Shelly thread started.
+2024-12-02 21:00:29,632 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 21:00:29,632 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 21:00:29,667 - INFO - Weather data saved successfully.
+2024-12-02 21:00:29,828 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:00:29,948 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:00:33,531 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:33] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:33,533 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:33] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:34,699 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:34] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:34,705 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:34] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:35,323 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:35] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:35,325 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:35] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:35,882 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:35] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:35,882 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:35] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:36,430 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:36] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:36,432 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:36] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:36,961 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:36] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:36,964 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:36] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:37,514 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:37] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:37,521 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:37] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:38,104 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:38] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:38,108 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:38] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:38,690 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:38] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:38,691 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:38] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:39,206 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:39] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:39,207 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:39] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:39,727 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:39] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:39,729 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:39] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:40,261 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:40] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:40,262 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:40] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:40,777 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:40] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:40,780 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:40] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:41,357 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:41] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:41,358 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:41] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:41,881 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:41] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:41,882 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:41] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:42,451 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:42] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:42,454 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:42] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:43,048 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:43] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:43,048 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:43] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:43,650 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:43] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:43,657 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:43] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:44,217 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:44] "GET /rooms/1 HTTP/1.1" 200 -
+2024-12-02 21:00:44,218 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:44] "GET /measurements/1?sorting=timestamp&order=desc&count=10 HTTP/1.1" 200 -
+2024-12-02 21:00:45,377 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:45] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:45,385 - WARNING - No measurements available for room 3.
+2024-12-02 21:00:45,385 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:45] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:00:45,390 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:45] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:45,392 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:45] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:00:45,393 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:45] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:47,035 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:47,070 - WARNING - No measurements available for room 3.
+2024-12-02 21:00:47,073 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:00:47,084 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:47,084 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:47,087 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:00:47,635 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:47,659 - WARNING - No measurements available for room 3.
+2024-12-02 21:00:47,660 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:00:47,663 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:47,664 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:00:47,665 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:47] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:48,232 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:48,256 - WARNING - No measurements available for room 3.
+2024-12-02 21:00:48,258 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:00:48,260 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:48,262 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:48,263 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:00:48,908 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:48,944 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:48,951 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:00:48,960 - WARNING - No measurements available for room 3.
+2024-12-02 21:00:48,960 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:00:48,962 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:48] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:00:49,561 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:49] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:00:49,587 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:49] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:00:49,589 - WARNING - No measurements available for room 3.
+2024-12-02 21:00:49,589 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:49] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:00:49,591 - INFO - 127.0.0.1 - - [02/Dec/2024 21:00:49] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:01:19,586 - ERROR - Error analyzing ventilation: QueuePool limit of size 5 overflow 10 reached, connection timed out, timeout 30.00 (Background on this error at: https://sqlalche.me/e/20/3o7r)
+2024-12-02 21:01:19,589 - INFO - 127.0.0.1 - - [02/Dec/2024 21:01:19] "[35m[1mGET /ventilation_analysis/4 HTTP/1.1[0m" 500 -
+2024-12-02 21:01:20,240 - ERROR - Error retrieving rooms: QueuePool limit of size 5 overflow 10 reached, connection timed out, timeout 30.00 (Background on this error at: https://sqlalche.me/e/20/3o7r)
+2024-12-02 21:01:20,241 - INFO - 127.0.0.1 - - [02/Dec/2024 21:01:20] "[35m[1mGET /rooms HTTP/1.1[0m" 500 -
+2024-12-02 21:01:30,170 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:01:30,258 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:01:41,881 - INFO - Weather thread started.
+2024-12-02 21:01:41,883 - INFO - Shelly thread started.
+2024-12-02 21:01:41,890 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 21:01:41,890 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 21:01:41,934 - INFO - Weather data saved successfully.
+2024-12-02 21:01:42,136 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:01:42,241 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:01:44,483 - INFO - 127.0.0.1 - - [02/Dec/2024 21:01:44] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:01:44,515 - INFO - 127.0.0.1 - - [02/Dec/2024 21:01:44] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:01:44,531 - WARNING - No measurements available for room 3.
+2024-12-02 21:01:44,531 - INFO - 127.0.0.1 - - [02/Dec/2024 21:01:44] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:01:44,534 - INFO - 127.0.0.1 - - [02/Dec/2024 21:01:44] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:01:44,536 - INFO - 127.0.0.1 - - [02/Dec/2024 21:01:44] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:02:42,461 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:02:42,555 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:02:44,121 - INFO - 127.0.0.1 - - [02/Dec/2024 21:02:44] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:02:44,136 - WARNING - No measurements available for room 3.
+2024-12-02 21:02:44,136 - INFO - 127.0.0.1 - - [02/Dec/2024 21:02:44] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:02:44,138 - INFO - 127.0.0.1 - - [02/Dec/2024 21:02:44] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:02:44,139 - INFO - 127.0.0.1 - - [02/Dec/2024 21:02:44] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:02:44,140 - INFO - 127.0.0.1 - - [02/Dec/2024 21:02:44] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:03:02,292 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:02] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:03:02,299 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:02] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:03:02,301 - WARNING - No measurements available for room 3.
+2024-12-02 21:03:02,301 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:02] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:03:02,305 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:02] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:03:02,305 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:02] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:03:09,732 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:09] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:03:09,739 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:09] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:03:09,743 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:09] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:03:39,742 - ERROR - Error analyzing ventilation: QueuePool limit of size 5 overflow 10 reached, connection timed out, timeout 30.00 (Background on this error at: https://sqlalche.me/e/20/3o7r)
+2024-12-02 21:03:39,742 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:39] "[35m[1mGET /ventilation_analysis/3 HTTP/1.1[0m" 500 -
+2024-12-02 21:03:39,742 - ERROR - Error analyzing ventilation: QueuePool limit of size 5 overflow 10 reached, connection timed out, timeout 30.00 (Background on this error at: https://sqlalche.me/e/20/3o7r)
+2024-12-02 21:03:39,742 - INFO - 127.0.0.1 - - [02/Dec/2024 21:03:39] "[35m[1mGET /ventilation_analysis/4 HTTP/1.1[0m" 500 -
+2024-12-02 21:03:42,767 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:03:42,875 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:04:11,979 - ERROR - Error saving weather data: QueuePool limit of size 5 overflow 10 reached, connection timed out, timeout 30.00 (Background on this error at: https://sqlalche.me/e/20/3o7r)
+2024-12-02 21:04:43,297 - INFO - Weather thread started.
+2024-12-02 21:04:43,298 - INFO - Shelly thread started.
+2024-12-02 21:04:43,307 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 21:04:43,307 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 21:04:43,346 - INFO - Weather data saved successfully.
+2024-12-02 21:04:43,470 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:04:43,599 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:04:45,776 - INFO - 127.0.0.1 - - [02/Dec/2024 21:04:45] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:04:45,786 - INFO - 127.0.0.1 - - [02/Dec/2024 21:04:45] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:04:45,788 - WARNING - No measurements available for room 3.
+2024-12-02 21:04:45,789 - INFO - 127.0.0.1 - - [02/Dec/2024 21:04:45] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:04:45,791 - INFO - 127.0.0.1 - - [02/Dec/2024 21:04:45] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:04:45,792 - INFO - 127.0.0.1 - - [02/Dec/2024 21:04:45] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:05:43,685 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:05:43,808 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:06:19,129 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:19] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:06:19,139 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:19] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:06:19,141 - WARNING - No measurements available for room 3.
+2024-12-02 21:06:19,141 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:19] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:06:19,142 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:19] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:06:19,144 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:19] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:06:37,717 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:37] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:06:37,751 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:37] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:06:37,752 - WARNING - No measurements available for room 3.
+2024-12-02 21:06:37,752 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:37] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:06:37,768 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:37] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:06:37,769 - INFO - 127.0.0.1 - - [02/Dec/2024 21:06:37] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:06:43,393 - INFO - Weather data saved successfully.
+2024-12-02 21:06:43,853 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:06:43,909 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:07:14,388 - INFO - 127.0.0.1 - - [02/Dec/2024 21:07:14] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:07:14,396 - INFO - 127.0.0.1 - - [02/Dec/2024 21:07:14] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:07:14,400 - INFO - 127.0.0.1 - - [02/Dec/2024 21:07:14] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:07:33,583 - INFO - Weather thread started.
+2024-12-02 21:07:33,585 - INFO - Shelly thread started.
+2024-12-02 21:07:33,592 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 21:07:33,592 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 21:07:33,630 - INFO - Weather data saved successfully.
+2024-12-02 21:07:33,760 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:07:33,883 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:07:35,301 - INFO - 127.0.0.1 - - [02/Dec/2024 21:07:35] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:07:35,316 - WARNING - No measurements available for room 3.
+2024-12-02 21:07:35,317 - INFO - 127.0.0.1 - - [02/Dec/2024 21:07:35] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:07:35,323 - INFO - 127.0.0.1 - - [02/Dec/2024 21:07:35] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:07:35,326 - INFO - 127.0.0.1 - - [02/Dec/2024 21:07:35] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:07:35,327 - INFO - 127.0.0.1 - - [02/Dec/2024 21:07:35] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:08:34,123 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:08:34,201 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:08:39,213 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:39] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:08:39,228 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:39] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:08:39,230 - WARNING - No measurements available for room 3.
+2024-12-02 21:08:39,230 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:39] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:08:39,234 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:39] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:08:39,236 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:39] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:08:47,047 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:47] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:08:47,055 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:47] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:08:47,056 - WARNING - No measurements available for room 3.
+2024-12-02 21:08:47,057 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:47] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:08:47,066 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:47] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:08:47,067 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:47] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:08:51,139 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:51] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:08:51,144 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:51] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:08:51,148 - INFO - 127.0.0.1 - - [02/Dec/2024 21:08:51] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:09:07,803 - INFO - Weather thread started.
+2024-12-02 21:09:07,804 - INFO - Shelly thread started.
+2024-12-02 21:09:07,811 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 21:09:07,811 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 21:09:07,869 - INFO - Weather data saved successfully.
+2024-12-02 21:09:07,895 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:09:07,930 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:09:09,619 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:09] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:09:09,644 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:09] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:09:09,648 - WARNING - No measurements available for room 3.
+2024-12-02 21:09:09,649 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:09] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:09:09,653 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:09] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:09:09,654 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:09] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:09:15,360 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:15] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:09:15,390 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:15] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:09:15,393 - WARNING - No measurements available for room 3.
+2024-12-02 21:09:15,393 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:15] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:09:15,397 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:15] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:09:15,397 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:15] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:09:37,898 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:37] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:09:37,935 - WARNING - No measurements available for room 3.
+2024-12-02 21:09:37,942 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:37] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:09:37,948 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:37] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:09:37,952 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:37] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:09:37,953 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:37] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:09:46,720 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:46] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:09:46,748 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:46] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:09:46,749 - WARNING - No measurements available for room 3.
+2024-12-02 21:09:46,749 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:46] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:09:46,752 - INFO - 127.0.0.1 - - [02/Dec/2024 21:09:46] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:09:59,477 - INFO - Weather thread started.
+2024-12-02 21:09:59,479 - INFO - Shelly thread started.
+2024-12-02 21:09:59,486 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 21:09:59,488 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 21:09:59,543 - INFO - Weather data saved successfully.
+2024-12-02 21:09:59,640 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:09:59,771 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:10:01,710 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:01] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:10:01,751 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:01] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:10:01,751 - WARNING - No measurements available for room 3.
+2024-12-02 21:10:01,751 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:01] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:10:01,758 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:01] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:10:01,759 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:01] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:10:22,703 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:22] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:10:22,733 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:22] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:10:22,735 - WARNING - No measurements available for room 3.
+2024-12-02 21:10:22,736 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:22] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:10:22,738 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:22] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:10:22,740 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:22] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:10:33,009 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:33] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:10:33,017 - WARNING - No measurements available for room 3.
+2024-12-02 21:10:33,017 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:33] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:10:33,024 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:33] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:10:33,026 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:33] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:10:33,028 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:33] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:10:44,665 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:44] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:10:44,688 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:44] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:10:44,690 - WARNING - No measurements available for room 3.
+2024-12-02 21:10:44,690 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:44] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:10:44,693 - INFO - 127.0.0.1 - - [02/Dec/2024 21:10:44] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:10:58,658 - INFO - Weather thread started.
+2024-12-02 21:10:58,660 - INFO - Shelly thread started.
+2024-12-02 21:10:58,667 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 21:10:58,667 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 21:10:58,739 - INFO - Weather data saved successfully.
+2024-12-02 21:10:58,792 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:10:58,888 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:11:00,293 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:00] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:11:00,303 - WARNING - No measurements available for room 3.
+2024-12-02 21:11:00,304 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:00] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:11:00,306 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:00] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:11:00,306 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:00] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:11:00,308 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:00] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:11:17,164 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:17] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:11:17,193 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:17] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:11:17,194 - WARNING - No measurements available for room 3.
+2024-12-02 21:11:17,195 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:17] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:11:17,195 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:17] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:11:17,196 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:17] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:11:21,714 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:21] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:11:21,740 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:21] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:11:21,741 - WARNING - No measurements available for room 3.
+2024-12-02 21:11:21,742 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:21] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:11:21,744 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:21] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:11:21,745 - INFO - 127.0.0.1 - - [02/Dec/2024 21:11:21] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:11:59,114 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:11:59,201 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:12:17,584 - INFO - 127.0.0.1 - - [02/Dec/2024 21:12:17] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:12:17,596 - INFO - 127.0.0.1 - - [02/Dec/2024 21:12:17] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:12:17,600 - INFO - 127.0.0.1 - - [02/Dec/2024 21:12:17] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:12:31,338 - INFO - Weather thread started.
+2024-12-02 21:12:31,339 - INFO - Shelly thread started.
+2024-12-02 21:12:31,348 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-02 21:12:31,348 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-02 21:12:31,378 - INFO - Weather data saved successfully.
+2024-12-02 21:12:31,459 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:12:31,557 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:12:33,272 - INFO - 127.0.0.1 - - [02/Dec/2024 21:12:33] "GET /rooms HTTP/1.1" 200 -
+2024-12-02 21:12:33,295 - INFO - 127.0.0.1 - - [02/Dec/2024 21:12:33] "GET /ventilation_analysis/1 HTTP/1.1" 200 -
+2024-12-02 21:12:33,298 - WARNING - No measurements available for room 3.
+2024-12-02 21:12:33,298 - INFO - 127.0.0.1 - - [02/Dec/2024 21:12:33] "[33mGET /ventilation_analysis/3 HTTP/1.1[0m" 404 -
+2024-12-02 21:12:33,301 - INFO - 127.0.0.1 - - [02/Dec/2024 21:12:33] "GET /ventilation_analysis/2 HTTP/1.1" 200 -
+2024-12-02 21:12:33,302 - INFO - 127.0.0.1 - - [02/Dec/2024 21:12:33] "GET /ventilation_analysis/4 HTTP/1.1" 200 -
+2024-12-02 21:13:31,781 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:13:31,867 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:14:31,455 - INFO - Weather data saved successfully.
+2024-12-02 21:14:32,094 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:14:32,181 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:15:32,420 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:15:32,493 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).
+2024-12-02 21:16:31,503 - INFO - Weather data saved successfully.
+2024-12-02 21:16:32,750 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.91).
+2024-12-02 21:16:32,819 - INFO - Shelly data saved for device 'Shelly' (IP: 192.168.178.96).

@@ -12,7 +12,8 @@ LOG_FILE = os.getenv("LOG_FILE", "app.log")
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 LATITUDE = float(os.getenv("LATITUDE", 0.0))
 LONGITUDE = float(os.getenv("LONGITUDE", 0.0))
-INTERVAL_SECONDS_WEATHER = int(os.getenv("INTERVAL_SECONDS_WEATHER", 60))  # Default: 1 minute
+LOCATION_NAME = os.getenv("LOCATION_NAME", "Potsdam")
+INTERVAL_SECONDS_WEATHER = int(os.getenv("INTERVAL_SECONDS_WEATHER", 120))  # Default: 2 minute
 INTERVAL_SECONDS_SHELLY = int(os.getenv("INTERVAL_SECONDS_SHELLY", 60))  # Default: 1 minute
 
 class WorkerThreads:
@@ -37,49 +38,52 @@ class WorkerThreads:
 
     @staticmethod
     def periodic_weather_update():
-        while True:
-            db_service = DatabaseService()
-            try:
+        db_service = DatabaseService()  # Verbindung nur einmal öffnen
+        try:
+            while True:
                 WorkerThreads.save_weather_data(db_service)
-            except Exception as e:
-                logging.error(f"Error in periodic weather update: {e}")
-            finally:
-                db_service.close()
-            time.sleep(INTERVAL_SECONDS_WEATHER)
+                time.sleep(INTERVAL_SECONDS_WEATHER)
+        except Exception as e:
+            logging.error(f"Error in periodic weather update: {e}")
+        finally:
+            db_service.close()
 
     @staticmethod
     def periodic_shelly_update():
-        while True:
-            db_service = DatabaseService()
-            try:
+        db_service = DatabaseService()  # Verbindung nur einmal öffnen
+        try:
+            while True:
                 WorkerThreads.save_shelly_data(db_service)
-            except Exception as e:
-                logging.error(f"Error in periodic Shelly update: {e}")
-            finally:
-                db_service.close()
-            time.sleep(INTERVAL_SECONDS_SHELLY)
+                time.sleep(INTERVAL_SECONDS_SHELLY)
+        except Exception as e:
+            logging.error(f"Error in periodic Shelly update: {e}")
+        finally:
+            db_service.close()
 
     @staticmethod
     def save_weather_data(db_service):
-        temperature, humidity = get_weather_data(LATITUDE, LONGITUDE, OPENWEATHER_API_KEY)
-        if temperature is not None and humidity is not None:
-            external_room = db_service.get_room_by_name("external")
-            if external_room:
-                db_service.save_measurement(external_room.id, temperature, humidity)
-                logging.info("Weather data saved successfully.")
-            else:
-                logging.error("External room not found. Weather data not saved.")
-        db_service.close()
+        try:
+            temperature, humidity = get_weather_data(LATITUDE, LONGITUDE, OPENWEATHER_API_KEY)
+            if temperature is not None and humidity is not None:
+                external_room = db_service.get_room_by_name(LOCATION_NAME)
+                if external_room:
+                    db_service.save_measurement(external_room.id, temperature, humidity)
+                    logging.info("Weather data saved successfully.")
+                else:
+                    logging.error("External room not found. Weather data not saved.")
+        except Exception as e:
+            logging.error(f"Error saving weather data: {e}")
 
     @staticmethod
     def save_shelly_data(db_service):
-        shelly_devices = db_service.get_shelly_devices()
-        for device in shelly_devices:
-            temperature, humidity = get_shelly_environment(device.ip)
-            if temperature is not None and humidity is not None:
-                db_service.save_measurement(device.room_id, temperature, humidity)
-                logging.info(f"Shelly data saved for device '{device.name}' (IP: {device.ip}).")
-            else:
-                logging.error(f"Failed to fetch data for Shelly device '{device.name}' (IP: {device.ip}).")
-        db_service.close()
-
+        try:
+            shelly_devices = db_service.get_shelly_devices()
+            for device in shelly_devices:
+                temperature, humidity = get_shelly_environment(device.ip)
+                if temperature is not None and humidity is not None:
+                    db_service.save_measurement(device.room_id, temperature, humidity)
+                    logging.info(f"Shelly data saved for device '{device.name}' (IP: {device.ip}).")
+                else:
+                    logging.error(f"Failed to fetch data for Shelly device '{device.name}' (IP: {device.ip}).")
+        except Exception as e:
+            logging.error(f"Error saving Shelly data: {e}")

@@ -2,11 +2,12 @@ import os
 import logging
 import threading
 from flask import Flask, request, jsonify
+from modules.ventilation_recommendation import calculate_ventilation_recommendation
 from services.database_service import DatabaseService
 from services.worker_services import WorkerThreads
 from dotenv import load_dotenv
 from pytz import timezone
-from datetime import datetime
+from datetime import datetime, timedelta
 from modules.database_setup import Device, SessionLocal, Room, Measurement, setup_database
 from flask_cors import CORS
 from sqlalchemy import func
@@ -65,8 +66,16 @@ def get_rooms():
         rooms = db_service.get_all_rooms()
         room_list = []
         for room in rooms:
+            # Letzte Messung und Geräte abrufen
             last_measurement = db_service.get_last_measurement_for_room(room.id)
             devices = db_service.get_room_devices(room.id)
+
+            # Berechnung der Lüftungsempfehlung
+            ventilation_recommendation = None
+            if last_measurement:
+                ventilation_recommendation = calculate_ventilation_recommendation(
+                    db_service, room.id
+                )
 
             room_list.append({
                 "id": room.id,
@@ -85,6 +94,7 @@ def get_rooms():
                     }
                     for device in devices
                 ],
+                "ventilation_recommendation": ventilation_recommendation
             })
         return jsonify({"rooms": room_list}), 200
     except Exception as e:
