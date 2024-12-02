@@ -1,14 +1,14 @@
 import os
 from dotenv import load_dotenv
-from weather_module import get_weather_data
-from shelly_module import get_shelly_environment
-from humidity_calculator import calculate_relative_humidity
+from modules.weather_module import get_weather_data
+from modules.shelly_module import get_shelly_environment
+from modules.humidity_calculator import calculate_relative_humidity
 
 def main():
     # Laden der Umgebungsvariablen
     load_dotenv()
 
-    api_key = os.getenv("API_KEY")
+    OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
     latitude = float(os.getenv("LATITUDE"))
     longitude = float(os.getenv("LONGITUDE"))
     shelly_ip = os.getenv("SHELLY_IP")
@@ -26,7 +26,7 @@ def main():
     print(f"Raumluftfeuchtigkeit: {indoor_humidity}%")
 
     # Wetterdaten abrufen
-    temp, humidity = get_weather_data(latitude, longitude, api_key)
+    temp, humidity = get_weather_data(latitude, longitude, OPENWEATHER_API_KEY)
     if temp is None or humidity is None:
         print("Fehler: Es konnten keine Wetterdaten abgerufen werden.")
         return

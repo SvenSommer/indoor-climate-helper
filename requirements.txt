@@ -4,3 +4,7 @@ numpy
 python-dotenv
 midea-inventor-lib
 hashlib
+flask
+sqlalchemy
+flask-cors
+pymysql

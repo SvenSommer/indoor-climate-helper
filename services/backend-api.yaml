@@ -1,0 +1,290 @@
+openapi: 3.0.0
+info:
+  title: Smart Room Management API
+  version: 1.0.0
+  description: API zur Verwaltung von Räumen, Geräten, Messungen, Wetter- und Shelly-Daten.
+servers:
+  - url: http://127.0.0.1:5000
+    description: Lokaler Server
+paths:
+  /rooms:
+    get:
+      summary: Alle Räume abrufen
+      responses:
+        '200':
+          description: Liste der Räume erfolgreich abgerufen.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rooms:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        last_measurement:
+                          type: object
+                          properties:
+                            timestamp:
+                              type: string
+                              format: date-time
+                            temperature:
+                              type: number
+                            humidity:
+                              type: number
+                        devices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              name:
+                                type: string
+                              device_type:
+                                type: string
+                              ip:
+                                type: string
+        '500':
+          description: Fehler beim Abrufen der Räume.
+    post:
+      summary: Neuen Raum hinzufügen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Wohnzimmer"
+      responses:
+        '201':
+          description: Raum erfolgreich hinzugefügt.
+        '400':
+          description: Raumname ist erforderlich.
+        '500':
+          description: Fehler beim Hinzufügen des Raums.
+  /rooms/{room_id}:
+    get:
+      summary: Spezifischen Raum abrufen
+      parameters:
+        - name: room_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Raum erfolgreich abgerufen.
+        '404':
+          description: Raum nicht gefunden.
+        '500':
+          description: Fehler beim Abrufen des Raums.
+    put:
+      summary: Raum aktualisieren
+      parameters:
+        - name: room_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Wohnzimmer"
+      responses:
+        '200':
+          description: Raum erfolgreich aktualisiert.
+        '404':
+          description: Raum nicht gefunden.
+        '500':
+          description: Fehler beim Aktualisieren des Raums.
+    delete:
+      summary: Raum löschen
+      parameters:
+        - name: room_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Raum erfolgreich gelöscht.
+        '404':
+          description: Raum nicht gefunden.
+        '500':
+          description: Fehler beim Löschen des Raums.
+  /devices:
+    get:
+      summary: Alle Geräte abrufen
+      responses:
+        '200':
+          description: Liste der Geräte erfolgreich abgerufen.
+        '500':
+          description: Fehler beim Abrufen der Geräte.
+    post:
+      summary: Neues Gerät hinzufügen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                room_id:
+                  type: integer
+                device_type:
+                  type: string
+                ip:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: Gerät erfolgreich hinzugefügt.
+        '500':
+          description: Fehler beim Hinzufügen des Geräts.
+  /devices/{device_id}:
+    get:
+      summary: Spezifisches Gerät abrufen
+      parameters:
+        - name: device_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Gerät erfolgreich abgerufen.
+        '404':
+          description: Gerät nicht gefunden.
+        '500':
+          description: Fehler beim Abrufen des Geräts.
+    put:
+      summary: Gerät aktualisieren
+      parameters:
+        - name: device_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                room_id:
+                  type: integer
+                device_type:
+                  type: string
+                ip:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Gerät erfolgreich aktualisiert.
+        '404':
+          description: Gerät nicht gefunden.
+        '500':
+          description: Fehler beim Aktualisieren des Geräts.
+    delete:
+      summary: Gerät löschen
+      parameters:
+        - name: device_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Gerät erfolgreich gelöscht.
+        '404':
+          description: Gerät nicht gefunden.
+        '500':
+          description: Fehler beim Löschen des Geräts.
+  /measurements/{room_id}:
+    get:
+      summary: Messungen für einen Raum abrufen
+      parameters:
+        - name: room_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: sorting
+          in: query
+          schema:
+            type: string
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+        - name: count
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Messungen erfolgreich abgerufen.
+        '500':
+          description: Fehler beim Abrufen der Messungen.
+    delete:
+      summary: Alle Messungen eines Raumes löschen
+      parameters:
+        - name: room_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Messungen erfolgreich gelöscht.
+        '404':
+          description: Keine Messungen gefunden.
+        '500':
+          description: Fehler beim Löschen der Messungen.
+  /weather:
+    post:
+      summary: Wetterdaten abrufen und speichern
+      responses:
+        '201':
+          description: Wetterdaten erfolgreich gespeichert.
+        '500':
+          description: Fehler beim Abrufen und Speichern der Wetterdaten.
+  /shelly:
+    post:
+      summary: Shelly-Daten abrufen und speichern
+      responses:
+        '201':
+          description: Shelly-Daten erfolgreich gespeichert.
+        '500':
+          description: Fehler beim Abrufen und Speichern der Shelly-Daten.

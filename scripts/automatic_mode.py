@@ -1,10 +1,10 @@
 import os
 import time
 from dotenv import load_dotenv
-from weather_module import get_weather_data
-from shelly_module import get_shelly_environment
-from humidity_calculator import calculate_relative_humidity, max_absolute_humidity
-from dehumidifier_module import DehumidifierController
+from modules.weather_module import get_weather_data
+from modules.shelly_module import get_shelly_environment
+from modules.humidity_calculator import calculate_relative_humidity, max_absolute_humidity
+from modules.dehumidifier_module import DehumidifierController
 from hashlib import sha256
 
 # Constants
@@ -18,7 +18,7 @@ def load_environment_variables():
     load_dotenv()
     try:
         return {
-            "api_key": os.getenv("API_KEY"),
+            "OPENWEATHER_API_KEY": os.getenv("OPENWEATHER_API_KEY"),
             "latitude": float(os.getenv("LATITUDE")),
             "longitude": float(os.getenv("LONGITUDE")),
             "shelly_ip": os.getenv("SHELLY_IP"),
@@ -48,9 +48,9 @@ def fetch_indoor_environment(shelly_ip):
     """Fetches indoor temperature and humidity from Shelly device."""
     return get_shelly_environment(shelly_ip)
 
-def fetch_outdoor_environment(latitude, longitude, api_key):
+def fetch_outdoor_environment(latitude, longitude, OPENWEATHER_API_KEY):
     """Fetches outdoor temperature and humidity from weather API."""
-    return get_weather_data(latitude, longitude, api_key)
+    return get_weather_data(latitude, longitude, OPENWEATHER_API_KEY)
 
 def evaluate_humidity_control(
     indoor_temp, indoor_humidity, outdoor_temp, outdoor_humidity, dehumidifier, target_humidity, min_indoor_temp, humidity_difference
@@ -141,7 +141,7 @@ def main():
                 continue
 
             outdoor_temp, outdoor_humidity = fetch_outdoor_environment(
-                config["latitude"], config["longitude"], config["api_key"]
+                config["latitude"], config["longitude"], config["OPENWEATHER_API_KEY"]
             )
             if outdoor_temp is None or outdoor_humidity is None:
                 print("Error fetching outdoor data.")

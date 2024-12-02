@@ -1,10 +1,10 @@
 import requests
 
-def get_weather_data(latitude, longitude, api_key):
+def get_weather_data(latitude, longitude, OPENWEATHER_API_KEY):
     """
     Fetches the current weather data for the given coordinates using the OpenWeatherMap API.
     """
-    url = f"http://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}&units=metric"
+    url = f"http://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={OPENWEATHER_API_KEY}&units=metric"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
