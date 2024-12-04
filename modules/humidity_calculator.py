@@ -11,7 +11,7 @@ def max_absolute_humidity(temp):
     """
     try:
         humidity = 6.112 * np.exp((17.67 * temp) / (temp + 243.5)) * 2.1674 / (273.15 + temp)
-        logging.debug(f"Maximale absolute Feuchtigkeit bei {temp}°C: {humidity:.2f} g/m³")
+        #logging.debug(f"Maximale absolute Feuchtigkeit bei {temp}°C: {humidity:.2f} g/m³")
         return humidity
     except Exception as e:
         logging.error(f"Fehler bei der Berechnung der maximalen absoluten Feuchtigkeit: {e}")
@@ -28,7 +28,7 @@ def calculate_relative_humidity(out_temp, out_humidity, in_temp):
             logging.warning("Maximale absolute Feuchtigkeit für die Innentemperatur ist 0. Division vermieden.")
             return 0
         relative_humidity_in = (abs_humidity_out / abs_humidity_in_max) * 100
-        logging.debug(f"Relative Feuchtigkeit bei {out_temp}°C außen und {in_temp}°C innen: {relative_humidity_in:.2f}%")
+        #logging.debug(f"Relative Feuchtigkeit bei {out_temp}°C außen und {in_temp}°C innen: {relative_humidity_in:.2f}%")
         return relative_humidity_in
     except Exception as e:
         logging.error(f"Fehler bei der Berechnung der relativen Feuchtigkeit: {e}")

@@ -1,9 +1,10 @@
-import os
 from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 from dotenv import load_dotenv
+import os
 import logging
+from datetime import datetime
 
 # Load environment variables
 load_dotenv()
@@ -11,9 +12,6 @@ load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///rooms.db")
 LOG_FILE = os.getenv("LOG_FILE", "setup.log")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
-DEHUMIDIFIER_EMAIL = os.getenv("DEHUMIDIFIER_EMAIL")
-DEHUMIDIFIER_PASSWORD = os.getenv("DEHUMIDIFIER_PASSWORD")
-
 
 # Logging setup
 logging.basicConfig(
@@ -31,7 +29,7 @@ SessionLocal = sessionmaker(bind=engine)
 class Room(Base):
     __tablename__ = "rooms"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255), unique=True, nullable=False)  # VARCHAR(255)
+    name = Column(String(255), unique=True, nullable=False)
 
 class Measurement(Base):
     __tablename__ = "measurements"
@@ -44,12 +42,33 @@ class Measurement(Base):
 class Device(Base):
     __tablename__ = "devices"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255), nullable=False)  # VARCHAR(255)
+    name = Column(String(255), nullable=False)
     room_id = Column(Integer, ForeignKey("rooms.id"), nullable=False)
-    device_type = Column(String(255), nullable=False)  # VARCHAR(255)
-    ip = Column(String(255), nullable=True)  # VARCHAR(255)
-    username = Column(String(255), nullable=True)  # VARCHAR(255)
-    password = Column(String(255), nullable=True)  # VARCHAR(255)
+    device_type = Column(String(255), nullable=False)
+    ip = Column(String(255), nullable=True)
+    username = Column(String(255), nullable=True)
+    password = Column(String(255), nullable=True)
+
+class WeatherReport(Base):
+    __tablename__ = "weather_reports"
+    id = Column(Integer, primary_key=True, index=True)
+    room_id = Column(Integer, ForeignKey("rooms.id"), nullable=False)
+    timestamp = Column(DateTime, nullable=False, default=datetime.utcnow)
+    temperature = Column(Float, nullable=True)
+    humidity = Column(Float, nullable=True)
+    weather_description = Column(String(255), nullable=True)
+    wind_speed = Column(Float, nullable=True)
+    wind_direction = Column(Float, nullable=True)
+    feels_like = Column(Float, nullable=True)
+    pressure = Column(Float, nullable=True)
+    cloud_coverage = Column(Integer, nullable=True)
+    visibility = Column(Integer, nullable=True)
+    sunrise = Column(DateTime, nullable=True)
+    sunset = Column(DateTime, nullable=True)
+
+    room = relationship("Room", back_populates="weather_reports")
+
+Room.weather_reports = relationship("WeatherReport", back_populates="room")
 
 # Function to initialize the database
 def setup_database():
@@ -62,7 +81,7 @@ def setup_database():
     except Exception as e:
         logging.error(f"Failed to setup the database: {e}")
     finally:
-        if session:  # Prüfen, ob session definiert ist
+        if session:
             session.close()
 
 # Helper function to add the external room

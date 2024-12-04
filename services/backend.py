@@ -2,7 +2,8 @@ import os
 import logging
 import threading
 from flask import Flask, request, jsonify
-from modules.ventilation_recommendation import calculate_ventilation_recommendation
+from modules.dehumidifier_module import DehumidifierController
+from modules.humidity_calculator import calculate_relative_humidity
 from services.database_service import DatabaseService
 from services.worker_services import WorkerThreads
 from dotenv import load_dotenv
@@ -63,6 +64,31 @@ def add_room():
 def get_rooms():
     db_service = DatabaseService()
     try:
+        # Messwerte von Raum 1 abrufen (Außentemperatur und Luftfeuchtigkeit)
+        room1_measurement = db_service.get_last_measurement_for_room(1)  # Raum 1 als Referenz
+        if not room1_measurement:
+            return jsonify({"error": "Failed to retrieve outdoor reference data (Room 1)"}), 500
+        
+        outside_temp = room1_measurement.temperature
+        outside_humidity = room1_measurement.humidity
+
+        # Wetterdaten für Raum 1 abrufen
+        last_weather_report = db_service.get_last_weather_report_for_room(1)
+        weather_data = {
+            "timestamp": last_weather_report.timestamp.astimezone(local_tz).isoformat() if last_weather_report else None,
+            "temperature": last_weather_report.temperature if last_weather_report else None,
+            "humidity": last_weather_report.humidity if last_weather_report else None,
+            "weather_description": last_weather_report.weather_description if last_weather_report else None,
+            "wind_speed": last_weather_report.wind_speed if last_weather_report else None,
+            "wind_direction": last_weather_report.wind_direction if last_weather_report else None,
+            "feels_like": last_weather_report.feels_like if last_weather_report else None,
+            "pressure": last_weather_report.pressure if last_weather_report else None,
+            "cloud_coverage": last_weather_report.cloud_coverage if last_weather_report else None,
+            "visibility": last_weather_report.visibility if last_weather_report else None,
+            "sunrise": last_weather_report.sunrise.astimezone(local_tz).isoformat() if last_weather_report else None,
+            "sunset": last_weather_report.sunset.astimezone(local_tz).isoformat() if last_weather_report else None,
+        }
+
         rooms = db_service.get_all_rooms()
         room_list = []
         for room in rooms:
@@ -70,13 +96,15 @@ def get_rooms():
             last_measurement = db_service.get_last_measurement_for_room(room.id)
             devices = db_service.get_room_devices(room.id)
 
-            # Berechnung der Lüftungsempfehlung
-            ventilation_recommendation = None
-            if last_measurement:
-                ventilation_recommendation = calculate_ventilation_recommendation(
-                    db_service, room.id
+            # Berechnung der Lüftungsempfehlung und des Lüftungspotentials
+            if last_measurement and outside_temp is not None and outside_humidity is not None and last_measurement.temperature is not None:
+                potential = calculate_relative_humidity(
+                    outside_temp,
+                    outside_humidity,
+                    last_measurement.temperature - 2
                 )
-
+            else:
+                potential = None
             room_list.append({
                 "id": room.id,
                 "name": room.name,
@@ -94,9 +122,12 @@ def get_rooms():
                     }
                     for device in devices
                 ],
-                "ventilation_recommendation": ventilation_recommendation
+                "ventilation_potential": f"{potential:.2f}%" if potential is not None else None
             })
-        return jsonify({"rooms": room_list}), 200
+
+        # Füge Wetterdaten zu den Rückgabewerten hinzu
+        return jsonify({"rooms": room_list, "weather_data": weather_data}), 200
+
     except Exception as e:
         logging.error(f"Error retrieving rooms: {e}")
         return jsonify({"error": "Failed to retrieve rooms"}), 500
@@ -309,6 +340,78 @@ def delete_device(device_id):
     finally:
         db.close()
 
+@app.route("/dehumidifier/<int:device_id>/status", methods=["GET"])
+def get_dehumidifier_status(device_id):
+    """Retrieve the status of the dehumidifier."""
+    db = next(get_db())
+    try:
+        # Gerät anhand der ID abrufen
+        device = db.query(Device).filter_by(id=device_id, device_type="Dehumidifier").first()
+        if not device:
+            return jsonify({"error": "Dehumidifier not found"}), 404
+
+        # Controller initialisieren
+        controller = DehumidifierController(device.username, device.password, sha256password="")
+        controller.login()
+
+        # Status abrufen
+        status = controller.get_status()
+        if not status:
+            return jsonify({"error": "Failed to retrieve dehumidifier status"}), 500
+
+        return jsonify({"status": status}), 200
+    except Exception as e:
+        logging.error(f"Error retrieving dehumidifier status: {e}")
+        return jsonify({"error": "Failed to retrieve dehumidifier status"}), 500
+    finally:
+        db.close()
+
+@app.route("/dehumidifier/<int:device_id>/control", methods=["POST"])
+def control_dehumidifier(device_id):
+    """Control the dehumidifier (on/off and set target humidity)."""
+    db = next(get_db())
+    try:
+        data = request.json
+        action = data.get("action")
+        target_humidity = data.get("target_humidity")
+
+        logging.info(f"Received control request for dehumidifier ID {device_id} with action '{action}'.")
+
+        # Gerät anhand der ID abrufen
+        device = db.query(Device).filter_by(id=device_id, device_type="Dehumidifier").first()
+        if not device:
+            logging.warning(f"Dehumidifier with ID {device_id} not found.")
+            return jsonify({"error": "Dehumidifier not found"}), 404
+
+        # Controller initialisieren
+        controller = DehumidifierController(device.username, device.password, sha256password="")
+        logging.info(f"Attempting to log in to dehumidifier ID {device_id}.")
+        controller.login()
+
+        # Aktion ausführen
+        if action == "on":
+            if not target_humidity:
+                logging.warning(f"Target humidity not provided for turning on dehumidifier ID {device_id}.")
+                return jsonify({"error": "Target humidity is required to turn on"}), 400
+
+            logging.info(f"Turning on dehumidifier ID {device_id} with target humidity {target_humidity}%.")
+            controller.turn_on(target_humidity)
+            logging.info(f"Dehumidifier ID {device_id} successfully turned on.")
+            return jsonify({"message": "Dehumidifier turned on", "target_humidity": target_humidity}), 200
+        elif action == "off":
+            logging.info(f"Turning off dehumidifier ID {device_id}.")
+            controller.turn_off()
+            logging.info(f"Dehumidifier ID {device_id} successfully turned off.")
+            return jsonify({"message": "Dehumidifier turned off"}), 200
+        else:
+            logging.warning(f"Invalid action '{action}' for dehumidifier ID {device_id}.")
+            return jsonify({"error": "Invalid action"}), 400
+    except Exception as e:
+        logging.error(f"Error controlling dehumidifier ID {device_id}: {e}")
+        return jsonify({"error": "Failed to control dehumidifier"}), 500
+    finally:
+        db.close()
+
 # POST endpoint: Add a new measurement
 @app.route("/measurements", methods=["POST"])
 def add_measurement():
@@ -465,4 +568,4 @@ def fetch_and_save_shelly_data():
 
 # Run the Flask app
 if __name__ == "__main__":
-    app.run(debug=False, use_reloader=False)
+    app.run(debug=False, use_reloader=False, host="0.0.0.0", port=5042)

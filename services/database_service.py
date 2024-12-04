@@ -1,5 +1,5 @@
 from datetime import datetime
-from modules.database_setup import Device, Room, Measurement, SessionLocal
+from modules.database_setup import Device, Room, Measurement, SessionLocal, WeatherReport
 from sqlalchemy import func
 import logging
 from pytz import timezone
@@ -15,6 +15,9 @@ class DatabaseService:
 
     def get_shelly_devices(self):
         return self.db.query(Device).filter(Device.device_type == "Shelly").all()
+    
+    def get_dehumidifier_devices(self):
+        return self.db.query(Device).filter(Device.device_type == "Dehumidifier").all()
 
     def save_measurement(self, room_id, temperature, humidity):
         try:
@@ -40,6 +43,49 @@ class DatabaseService:
         except Exception as e:
             self.db.rollback()
             raise e
+        
+    def save_weather_report(self, **weather_details):
+        """
+        Speichert Wetterdaten in der WeatherReport-Tabelle, falls keine ähnlichen Daten existieren.
+        :param weather_details: Dictionary mit Wetterinformationen
+        """
+        try:
+            # Prüfen, ob bereits ein ähnlicher Eintrag existiert (zeitnah und gleiche Raum-ID)
+            existing_report = self.db.query(WeatherReport).filter(
+                WeatherReport.room_id == weather_details["room_id"],
+                func.abs(func.unix_timestamp(WeatherReport.timestamp) - func.unix_timestamp(datetime.utcnow())) < 5,
+                WeatherReport.temperature == weather_details.get("temperature"),
+                WeatherReport.humidity == weather_details.get("humidity"),
+            ).first()
+
+            if not existing_report:
+                # Neuen Wetterbericht speichern
+                weather_report = WeatherReport(**weather_details)
+                self.db.add(weather_report)
+                self.db.commit()
+                logging.info("Weather report saved successfully.")
+            else:
+                logging.debug("Similar weather report already exists. No new entry created.")
+
+        except Exception as e:
+            self.db.rollback()
+            logging.error(f"Error saving weather report: {e}")
+            raise e
+        
+    def get_last_weather_report_for_room(self, room_id):
+        """
+        Holt den letzten Wetterbericht für einen bestimmten Raum.
+        """
+        try:
+            return (
+                self.db.query(WeatherReport)
+                .filter_by(room_id=room_id)
+                .order_by(WeatherReport.timestamp.desc())
+                .first()
+            )
+        except Exception as e:
+            logging.error(f"Error retrieving last weather report for room {room_id}: {e}")
+            return None
 
     def get_room_by_id(self, id):
         return self.db.query(Room).filter_by(id=id).first()

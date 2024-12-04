@@ -1,0 +1,157 @@
+.list-group {
+  display: flex; /* Flexbox für gleichmäßige Größen */
+  //max-width: 600px;
+  flex-wrap: wrap; /* Karten umbrechen, wenn der Platz nicht ausreicht */
+  justify-content: center; /* Zentriert die Karten horizontal */
+  gap: 20px; /* Abstand zwischen den Karten */
+  padding: 0;
+  list-style: none;
+
+}
+
+.list-group-item {
+  flex: 0 1 calc(20.333% - 30px); /* Karten teilen sich den Platz gleichmäßig auf */
+
+  display: flex; /* Flexbox für vertikale Ausrichtung */
+  flex-direction: column; /* Inhalte vertikal anordnen */
+  justify-content: space-between; /* Platz zwischen den Elementen nutzen */
+  padding: 15px;
+  background-color: #f9f9f9;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.icon-wrapper {
+  display: inline-block;
+  cursor: pointer; /* Zeigt die Hand bei Hover */
+  padding: 5px; /* Optional: Platz um das Icon */
+  border-radius: 50%; /* Macht es rund, falls gewünscht */
+  transition: background-color 0.2s ease; /* Animation beim Hover */
+}
+
+.icon-wrapper:hover {
+  background-color: #f0f0f0; /* Heller Hintergrund bei Hover */
+}
+
+
+
+.list-group-current-item {
+  width: 300px; /* Maximale Breite der Karten */
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.list-group-trend-item {
+  //max-width: 400px; /* Maximale Breite der Karten */
+  //display: flex; /* Flexbox für vertikale Ausrichtung */
+  //justify-content: space-between; /* Platz zwischen den Elementen nutzen */
+  padding: 15px;
+  background-color: #f9f9f9;
+
+}
+
+.list-group-column-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+ h5 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.list-group-row-item {
+  display: flex; /* Flexbox für vertikale Ausrichtung */
+  flex-direction: row; /* Inhalte vertikal anordnen */
+  background-color: #f9f9f9;
+}
+
+
+.btn-info {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  margin-top: 10px;
+  align-self: flex-start; /* Button bleibt oben ausgerichtet */
+}
+
+.btn-secondary {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+
+.border-container {
+  border: 2px solid #007bff; /* Sichtbarer blauer Rahmen */
+  border-radius: 8px; /* Abgerundete Ecken */
+  padding: 15px; /* Innenabstand für Luft um die Inhalte */
+  background-color: #f9f9f9; /* Optional: leichtes Hintergrundfarbe für Kontrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Schattierung für Tiefe */
+}
+
+.devices-wrapper {
+  margin-bottom: 20px; /* Abstand zwischen Geräten und dem "Gerät hinzufügen"-Bereich */
+}
+
+.new-device-container {
+  border: 2px dashed #28a745; /* Sichtbarer grüner gestrichelter Rahmen */
+  border-radius: 8px; /* Abgerundete Ecken */
+  padding: 15px; /* Abstand innerhalb des Rahmens */
+  background-color: #e9f7ec; /* Helles Grün für einen visuellen Hinweis */
+  margin-top: 15px; /* Abstand über diesem Bereich */
+}
+
+.new-device-container .input-group {
+  margin-bottom: 10px; /* Abstand zwischen den Eingabefeldern */
+}
+
+
+
+.recommendation-wrapper {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
+.recommendation-wrapper h6 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.recommendation-wrapper p {
+  margin: 5px 0;
+}
+
+.two_rows {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Zwei Spalten */
+  gap: 16px; /* Abstand zwischen Spalten */
+  padding: 16px;
+  background-color: #f9f9f9; /* Hintergrundfarbe */
+  border: 1px solid #ddd; /* Dezente Umrandung */
+  border-radius: 8px; /* Abgerundete Ecken */
+}
+
+.two_rows p {
+  display: flex;
+  align-items: center; /* Icons und Text vertikal zentrieren */
+  gap: 8px; /* Abstand zwischen Icon und Text */
+}
+
+.two_rows strong {
+  margin-left: 4px; /* Kleiner Abstand für bessere Lesbarkeit */
+}
+
+.two_rows .icon-wrapper {
+  padding: 5px; /* Platz um das Icon */
+  border-radius: 50%; /* Rundes Icon */
+  transition: background-color 0.2s ease; /* Animation beim Hover */
+}
+
+

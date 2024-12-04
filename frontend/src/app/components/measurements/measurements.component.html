@@ -1,0 +1,96 @@
+<div class="container mt-4">
+  <!-- Zurück-Button -->
+
+
+  <h2>Messungen für {{ roomName }}</h2>
+  <button class="btn btn-sm btn-secondary mb-3" (click)="goBackToRooms()">← Zurück</button>
+
+  <!-- Filter -->
+  <form (submit)="applyFilter()" class="mb-3">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label for="startDate" class="form-label">Von</label>
+        <input
+          id="startDate"
+          type="date"
+          class="form-control"
+          [(ngModel)]="startDate"
+          name="startDate"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="endDate" class="form-label">Bis</label>
+        <input
+          id="endDate"
+          type="date"
+          class="form-control"
+          [(ngModel)]="endDate"
+          name="endDate"
+        />
+      </div>
+      <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary">Filtern</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Items per Page -->
+  <div class="mb-3">
+    <label for="itemsPerPage" class="form-label">Einträge pro Seite</label>
+    <select
+      id="itemsPerPage"
+      class="form-select"
+      [(ngModel)]="count"
+      (change)="loadMeasurements()"
+    >
+      <option *ngFor="let size of [10, 50, 250, 500, 1000]" [value]="size">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Tabelle -->
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th (click)="changeSorting('timestamp')">
+          Zeitstempel
+          <span *ngIf="sorting === 'timestamp'">{{ order === 'asc' ? '⬆️' : '⬇️' }}</span>
+        </th>
+        <th (click)="changeSorting('temperature')">
+          Temperatur
+          <span *ngIf="sorting === 'temperature'">{{ order === 'asc' ? '⬆️' : '⬇️' }}</span>
+        </th>
+        <th (click)="changeSorting('humidity')">
+          Luftfeuchtigkeit
+          <span *ngIf="sorting === 'humidity'">{{ order === 'asc' ? '⬆️' : '⬇️' }}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let measurement of measurements">
+        <td>{{ measurement.timestamp | date: 'dd.MM.yyyy, HH:mm:ss' }}</td>
+        <td>{{ measurement.temperature | number: '1.1-2' }}°C</td>
+        <td>{{ measurement.humidity | number: '1.1-2' }}%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-between mt-3">
+    <button
+      class="btn btn-secondary"
+      [disabled]="offset === 0"
+      (click)="changePage(false)"
+    >
+      Zurück
+    </button>
+    <button
+      class="btn btn-secondary"
+      [disabled]="offset + count >= totalCount"
+      (click)="changePage(true)"
+    >
+      Weiter
+    </button>
+  </div>
+</div>
