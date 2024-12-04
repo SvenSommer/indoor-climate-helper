@@ -43,13 +43,24 @@
       [(ngModel)]="count"
       (change)="loadMeasurements()"
     >
-      <option *ngFor="let size of [10, 50, 250, 500, 1000]" [value]="size">
+      <option *ngFor="let size of [10, 50, 250, 500, 1000, 10000]" [value]="size">
         {{ size }}
       </option>
     </select>
   </div>
 
+ <!-- Chart -->
+  <div class="chart-container mt-4">
+    <canvas
+      baseChart
+      [data]="chartData"
+      [type]="'line'"
+      [options]="chartOptions"
+    ></canvas>
+  </div>
+
   <!-- Tabelle -->
+  <h3 class="header">Messwerte</h3>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -93,4 +104,5 @@
       Weiter
     </button>
   </div>
+
 </div>
