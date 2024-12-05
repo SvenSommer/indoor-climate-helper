@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
-import moment from 'moment';
 
 
 
@@ -17,6 +16,10 @@ import moment from 'moment';
 })
 export class RoomsComponent implements OnInit {
   rooms: any[] = [];
+  reloadInterval: any;
+  countdownInterval: any;
+  reloadTime: number = 30; // Zeit zwischen Reloads (in Sekunden)
+  countdown: number = this.reloadTime; // Countdown-Startwert
   weatherData: any = null;
   expandedRoomId: number | null = null;
   showAddRoom: boolean = false; // Steuert das Formular für Raum hinzufügen
@@ -41,6 +44,35 @@ export class RoomsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadRooms();
+    this.startReloadCountdown();
+  }
+
+  ngOnDestroy(): void {
+    this.stopIntervals();
+  }
+
+  startReloadCountdown(): void {
+    // Countdown-Intervall für jede Sekunde
+    this.countdown = this.reloadTime; // Countdown zurücksetzen
+    this.countdownInterval = setInterval(() => {
+      if (this.countdown > 0) {
+        this.countdown--;
+      } else {
+        this.loadRooms();
+        this.resetCountdown(); // Countdown zurücksetzen
+      }
+    }, 1000); // Jede Sekunde aktualisieren
+  }
+
+  resetCountdown(): void {
+    this.countdown = this.reloadTime; // Countdown zurücksetzen
+  }
+
+  stopIntervals(): void {
+    // Alle Intervalle aufräumen
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
   }
 
   loadRooms(): void {

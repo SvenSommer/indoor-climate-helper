@@ -1,5 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from modules.database_setup import Device, Room, Measurement, SessionLocal, WeatherReport
+from modules.humidity_calculator import calculate_relative_humidity
 from sqlalchemy import func
 import logging
 from pytz import timezone
@@ -24,10 +25,27 @@ class DatabaseService:
             # Prüfen, ob ein Messpunkt mit ähnlichem Zeitstempel, Temperatur und Feuchtigkeit existiert
             existing_measurement = self.db.query(Measurement).filter(
                 Measurement.room_id == room_id,
-                func.abs(func.unix_timestamp(Measurement.timestamp) - func.unix_timestamp(datetime.utcnow())) < 5,  # Prüft auf Zeitstempel-Differenz kleiner als 5 Sekunden
+                func.abs(func.unix_timestamp(Measurement.timestamp) - func.unix_timestamp(datetime.utcnow())) < 5,
                 Measurement.temperature == temperature,
                 Measurement.humidity == humidity
             ).first()
+
+            potential_humidity = None
+            if room_id != 1 and temperature is not None:
+                # Außentemperatur und -feuchtigkeit abrufen mit der Hilfsfunktion
+                outside_measurement = self.get_last_measurement_for_room(1)
+
+                outside_temp = None
+                outside_humidity = None
+                if outside_measurement:
+                    outside_temp = outside_measurement.temperature
+                    outside_humidity = outside_measurement.humidity
+                else:
+                    logging.warning("Kein Außentemperatur-Messpunkt verfügbar.")
+
+                # Potenzielle relative Luftfeuchtigkeit berechnen
+                if outside_temp is not None and outside_humidity is not None:
+                    potential_humidity = calculate_relative_humidity(outside_temp, outside_humidity, temperature)
 
             # Wenn kein ähnlicher Messpunkt vorhanden ist, speichern
             if not existing_measurement:
@@ -36,14 +54,88 @@ class DatabaseService:
                     timestamp=datetime.utcnow(),
                     temperature=temperature,
                     humidity=humidity,
+                    potential_humidity=potential_humidity,  # Neuer Wert
                 )
                 self.db.add(new_measurement)
                 self.db.commit()
+                logging.info(f"Messung für Raum {room_id} erfolgreich gespeichert.")
 
         except Exception as e:
             self.db.rollback()
+            logging.error(f"Fehler beim Speichern des Messwerts: {e}")
             raise e
-        
+            
+    def update_potential_humidity_in_historical_data_with_logging(self, t_delta=-2):
+        """
+        Aktualisiert die historischen Messpunkte in der Datenbank und gibt Fortschritt zurück.
+
+        :param t_delta: Temperaturdifferenz, welche beim Lüften entsteht (Standard: -2°C)
+        :yield: Fortschrittsnachrichten als Strings
+        """
+        try:
+            # Gesamtanzahl und Zeitbereich der Außendaten loggen
+            outside_count = self.db.query(Measurement).filter_by(room_id=1).count()
+            logging.info(f"Total outside measurements available: {outside_count}")
+            first_outside = self.db.query(Measurement).filter_by(room_id=1).order_by(Measurement.timestamp.asc()).first()
+            last_outside = self.db.query(Measurement).filter_by(room_id=1).order_by(Measurement.timestamp.desc()).first()
+            logging.info(f"Outside measurements range from {first_outside.timestamp} to {last_outside.timestamp}")
+
+            # Messpunkte abrufen
+            measurements = (
+                self.db.query(Measurement)
+                .filter(
+                    Measurement.room_id != 1,
+                    Measurement.temperature.isnot(None)
+                )
+                .order_by(Measurement.timestamp.asc())
+            )
+
+            cached_outside_measurement = None
+            cached_timestamp = None
+            updated_count = 0
+            total_count = self.db.query(Measurement).filter(
+                Measurement.room_id != 1,
+                Measurement.temperature.isnot(None)
+            ).count()
+
+            yield f"Starting update for {total_count} measurements...\n"
+
+            for index, measurement in enumerate(measurements, start=1):
+                try:
+                    if (
+                        cached_outside_measurement is None or
+                        cached_timestamp is None or
+                        cached_timestamp < (measurement.timestamp - timedelta(minutes=600))
+                    ):
+                        cached_outside_measurement = self.get_nearest_measurement(1, measurement.timestamp)
+                        if cached_outside_measurement:
+                            cached_timestamp = cached_outside_measurement.timestamp
+                        else:
+                            logging.warning(f"No outside measurement found for timestamp: {measurement.timestamp}")
+                            continue
+
+                    outside_temp = cached_outside_measurement.temperature
+                    outside_humidity = cached_outside_measurement.humidity
+
+                    if outside_temp is not None and outside_humidity is not None:
+                        potential_humidity = calculate_relative_humidity(
+                            outside_temp, outside_humidity, measurement.temperature, t_delta
+                        )
+                        measurement.potential_humidity = potential_humidity
+                        self.db.flush()
+                        updated_count += 1
+
+                except Exception as measurement_error:
+                    logging.error(f"Error processing measurement ID {measurement.id}: {measurement_error}")
+
+            self.db.commit()
+            yield f"Update completed: {updated_count}/{total_count} measurements updated successfully.\n"
+
+        except Exception as e:
+            self.db.rollback()
+            logging.error(f"Error during update: {e}")
+            yield f"Error: {e}\n"
+
     def save_weather_report(self, **weather_details):
         """
         Speichert Wetterdaten in der WeatherReport-Tabelle, falls keine ähnlichen Daten existieren.
@@ -152,6 +244,37 @@ class DatabaseService:
         except Exception as e:
             logging.error(f"Error retrieving measurements for room {room_id}: {e}")
             return []
+        
+    def get_nearest_measurement(self, room_id, timestamp):
+        """
+        Findet den nächstgelegenen Messpunkt (vor oder nach einem gegebenen Zeitstempel).
+        """
+        before_measurement = (
+            self.db.query(Measurement)
+            .filter(
+                Measurement.room_id == room_id,
+                Measurement.timestamp <= timestamp
+            )
+            .order_by(Measurement.timestamp.desc())
+            .first()
+        )
+
+        after_measurement = (
+            self.db.query(Measurement)
+            .filter(
+                Measurement.room_id == room_id,
+                Measurement.timestamp > timestamp
+            )
+            .order_by(Measurement.timestamp.asc())
+            .first()
+        )
+
+        if before_measurement and after_measurement:
+            delta_before = abs((timestamp - before_measurement.timestamp).total_seconds())
+            delta_after = abs((after_measurement.timestamp - timestamp).total_seconds())
+            return before_measurement if delta_before <= delta_after else after_measurement
+
+        return before_measurement or after_measurement
 
     def get_all_measurements(self, room_id, sorting="timestamp", order="asc", count=None, offset=0):
         query = self.db.query(Measurement).filter_by(room_id=room_id)

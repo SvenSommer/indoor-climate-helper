@@ -17,11 +17,12 @@ def max_absolute_humidity(temp):
         logging.error(f"Fehler bei der Berechnung der maximalen absoluten Feuchtigkeit: {e}")
         return 0
 
-def calculate_relative_humidity(out_temp, out_humidity, in_temp):
+def calculate_relative_humidity(out_temp, out_humidity, in_temp, delta_t=-2):
     """
     Calculates the relative humidity of outdoor air when heated to indoor temperature.
     """
     try:
+        in_temp += delta_t  # descease indoor temperature by delta_t, because it will cool down, when ventilated
         abs_humidity_out = max_absolute_humidity(out_temp) * (out_humidity / 100)
         abs_humidity_in_max = max_absolute_humidity(in_temp)
         if abs_humidity_in_max == 0:

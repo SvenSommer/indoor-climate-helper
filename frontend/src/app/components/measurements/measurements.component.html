@@ -50,14 +50,19 @@
   </div>
 
  <!-- Chart -->
-  <div class="chart-container mt-4">
-    <canvas
-      baseChart
-      [data]="chartData"
-      [type]="'line'"
-      [options]="chartOptions"
-    ></canvas>
+
+ <div class="chart-container mt-4">
+  <canvas
+    baseChart
+    [data]="chartData"
+    [type]="'line'"
+    [options]="chartOptions"
+  ></canvas>
+</div>
+  <div class="reload-timer">
+    <p>Reload in: {{ countdown }} Sekunden</p>
   </div>
+
 
   <!-- Tabelle -->
   <h3 class="header">Messwerte</h3>

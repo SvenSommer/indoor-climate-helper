@@ -1,7 +1,7 @@
 import os
 import logging
 import threading
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from modules.dehumidifier_module import DehumidifierController
 from modules.humidity_calculator import calculate_relative_humidity
 from services.database_service import DatabaseService
@@ -101,7 +101,7 @@ def get_rooms():
                 potential = calculate_relative_humidity(
                     outside_temp,
                     outside_humidity,
-                    last_measurement.temperature - 2
+                    last_measurement.temperature
                 )
             else:
                 potential = None
@@ -493,6 +493,7 @@ def get_measurements(room_id):
                 "timestamp": m.timestamp.astimezone(local_tz).isoformat(),
                 "temperature": m.temperature,
                 "humidity": m.humidity,
+                "potential_humidity": m.potential_humidity
             }
             for m in measurements
         ]
@@ -541,6 +542,27 @@ def delete_measurements(room_id):
     except Exception as e:
         logging.error(f"Error deleting measurements: {e}")
         return jsonify({"error": "Failed to delete measurements"}), 500
+    
+# POST endpoint: Update potential humidity for historical data
+@app.route("/update_potential_humidity", methods=["POST"])
+def update_potential_humidity():
+    db_service = DatabaseService()
+    logging.info("Starting update of potential humidity in historical data...")
+    try:
+        t_delta = request.json.get("t_delta", -2)  # Optionaler Parameter mit Standardwert -2°C
+
+        def stream_progress():
+            try:
+                for progress in db_service.update_potential_humidity_in_historical_data_with_logging(t_delta):
+                    yield f"data: {progress}\n\n"
+                yield "data: Update completed successfully\n\n"
+            except Exception as e:
+                logging.error(f"Error during update: {e}")
+                yield f"data: Error: {e}\n\n"
+
+        return Response(stream_progress(), content_type="text/event-stream")
+    finally:
+        db_service.close()
     
 # POST endpoint: Abrufen und Speichern von Wetterdaten
 @app.route("/weather", methods=["POST"])

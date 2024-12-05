@@ -17,6 +17,10 @@ export class MeasurementsComponent implements OnInit {
   measurements: any[] = [];
   roomId: number | null = null;
   roomName: string | null = null;
+  reloadInterval: any;
+  countdownInterval: any;
+  reloadTime: number = 30; // Zeit zwischen Reloads (in Sekunden)
+  countdown: number = this.reloadTime; // Countdown-Startwert
 
   // Chart-Properties
   chartData: ChartConfiguration['data'] = {
@@ -54,6 +58,36 @@ export class MeasurementsComponent implements OnInit {
       this.loadRoomName();
       this.loadMeasurements();
     });
+
+    this.startReloadCountdown();
+  }
+
+  ngOnDestroy(): void {
+    this.stopIntervals();
+  }
+
+  startReloadCountdown(): void {
+    // Countdown-Intervall für jede Sekunde
+    this.countdown = this.reloadTime; // Countdown zurücksetzen
+    this.countdownInterval = setInterval(() => {
+      if (this.countdown > 0) {
+        this.countdown--;
+      } else {
+        this.loadMeasurements(); // Messungen neu laden
+        this.resetCountdown(); // Countdown zurücksetzen
+      }
+    }, 1000); // Jede Sekunde aktualisieren
+  }
+
+  resetCountdown(): void {
+    this.countdown = this.reloadTime; // Countdown zurücksetzen
+  }
+
+  stopIntervals(): void {
+    // Alle Intervalle aufräumen
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
   }
 
   loadRoomName(): void {
@@ -125,6 +159,10 @@ export class MeasurementsComponent implements OnInit {
       .map((m) => m.humidity)
       .reverse(); // Reihenfolge der Luftfeuchtigkeitsdaten umkehren
 
+    const potential_humidityData = this.measurements
+      .map((m) => m.potential_humidity)
+      .reverse(); // Reihenfolge der Luftfeuchtigkeitsdaten umkehren
+
     this.chartData = {
       labels, // Labels mit detailliertem Zeitstempel
       datasets: [
@@ -140,6 +178,13 @@ export class MeasurementsComponent implements OnInit {
           label: 'Luftfeuchtigkeit (%)',
           fill: false,
           borderColor: 'green',
+          tension: 0.1,
+        },
+        {
+          data: potential_humidityData,
+          label: 'Potentielle Luftfeuchtigkeit (%)',
+          fill: false,
+          borderColor: 'yellow',
           tension: 0.1,
         },
       ],
@@ -178,4 +223,6 @@ export class MeasurementsComponent implements OnInit {
     this.offset = 0; // Reset Pagination
     this.loadMeasurements();
   }
+
+
 }

@@ -38,6 +38,7 @@ class Measurement(Base):
     timestamp = Column(DateTime, nullable=False)
     temperature = Column(Float, nullable=True)
     humidity = Column(Float, nullable=True)
+    potential_humidity = Column(Float, nullable=True)
 
 class Device(Base):
     __tablename__ = "devices"

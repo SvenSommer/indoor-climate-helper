@@ -360,7 +360,12 @@
         </div>
       </li>
     </ul>
+
+    <div class="reload-timer">
+      <p>Reload in: {{ countdown }} Sekunden</p>
+    </div>
   </section>
+
 
   <!-- Keine Räume gefunden -->
   <div *ngIf="rooms.length === 0" class="alert alert-info mt-4">
