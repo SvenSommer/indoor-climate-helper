@@ -65,7 +65,7 @@ class DatabaseService:
             logging.error(f"Fehler beim Speichern des Messwerts: {e}")
             raise e
             
-    def update_potential_humidity_in_historical_data_with_logging(self, t_delta=-2):
+    def update_potential_humidity_in_historical_data_with_logging(self, t_delta=-1):
         """
         Aktualisiert die historischen Messpunkte in der Datenbank und gibt Fortschritt zurück.
 

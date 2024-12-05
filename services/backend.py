@@ -112,6 +112,7 @@ def get_rooms():
                     "timestamp": last_measurement.timestamp.astimezone(local_tz).isoformat() if last_measurement else None,
                     "temperature": last_measurement.temperature if last_measurement else None,
                     "humidity": last_measurement.humidity if last_measurement else None,
+                    "potential_humidity": last_measurement.potential_humidity if last_measurement else None
                 },
                 "devices": [
                     {

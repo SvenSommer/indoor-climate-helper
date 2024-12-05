@@ -40,6 +40,8 @@ class WorkerThreads:
         else:
             logging.info("Shelly thread is already running. Skipping start.")
 
+        return
+
         # Start Dehumidifier Thread
         if not self.dehumidifier_thread or not self.dehumidifier_thread.is_alive():
             self.dehumidifier_thread = threading.Thread(target=self.periodic_dehumidifier_update, daemon=True)

@@ -194,49 +194,8 @@
           <div class="list-group-trend-item">
 
             <!-- Empfehlungen Wrapper -->
-            <h4 class="text">Trend</h4>
-            <ng-container *ngIf="room.ventilation_recommendation; else noRecommendation">
-              <p>
-                Trend: <strong>{{ room.ventilation_recommendation.trend }}</strong>
-              </p>
-              <p>
-                Maßnahme:
-                <strong>{{ room.ventilation_recommendation.action }}</strong>
-              </p>
-              <p *ngIf="room.ventilation_recommendation.historical_min && room.ventilation_recommendation.historical_max">
-                Historische Luftfeuchtigkeit:
-                <strong>Min: {{ room.ventilation_recommendation.historical_min }}%, Max: {{ room.ventilation_recommendation.historical_max }}%</strong>
-              </p>
-              <ng-container *ngIf="room.ventilation_recommendation.trend === 'steigend'">
-                <p>
-                  Geschätzte maximale Luftfeuchtigkeit:
-                  <strong>{{ room.ventilation_recommendation.maximum_humidity }}%</strong>
-                </p>
-                <p>
-                  Geschätzte Zeit bis zur maximalen Luftfeuchtigkeit:
-                  <strong>{{ calculateTimeUntil(room.ventilation_recommendation.time_of_maximum) }}</strong>
-                </p>
-              </ng-container>
-              <ng-container *ngIf="room.ventilation_recommendation.trend === 'fallend'">
-                <p>
-                  Geschätzte minimale Luftfeuchtigkeit:
-                  <strong>{{ room.ventilation_recommendation.minimum_humidity }}%</strong>
-                </p>
-                <p>
-                  Geschätzte Zeit bis zur minimalen Luftfeuchtigkeit:
-                  <strong>{{ calculateTimeUntil(room.ventilation_recommendation.time_of_minimum) }}</strong>
-                </p>
-              </ng-container>
-              <ng-container *ngIf="room.ventilation_recommendation.prediction_flattening">
-                <p>
-                  Geschätzter Zeitpunkt der Abflachung der Kurve:
-                  <strong>{{ calculateTimeUntil(room.ventilation_recommendation.prediction_flattening) }}</strong>
-                </p>
-              </ng-container>
-            </ng-container>
-            <ng-template #noRecommendation>
-              <p>Keine Empfehlung verfügbar.</p>
-            </ng-template>
+            <h4 class="text">Empfehlung</h4>
+            <div *ngIf="room.id != 1">{{ getRecommendation( room.last_measurement) }}</div>
         </div>
         </div>
 

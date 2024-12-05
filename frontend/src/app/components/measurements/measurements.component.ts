@@ -224,5 +224,28 @@ export class MeasurementsComponent implements OnInit {
     this.loadMeasurements();
   }
 
+  getRecommendation(measurement: { temperature: number; humidity: number; potential_humidity: number }): string {
+    const temp = measurement.temperature;
+    const humidity = measurement.humidity;
+    const potentialHumidity = measurement.potential_humidity;
+
+    if (humidity && potentialHumidity) {
+      const humidityDiff = Math.abs(humidity - potentialHumidity);
+
+      // Lüften beenden, wenn die Temperatur unter 21°C fällt oder die Differenz unter 2% ist
+      if (temp < 21 || humidityDiff <= 2) {
+        return 'Lüften beenden';
+      }
+
+      // Lüften empfehlen, wenn die Differenz größer als 10% ist
+      if (humidityDiff > 10) {
+        return 'Lüften';
+      }
+    }
+
+    // Keine Empfehlung
+    return '-';
+  }
+
 
 }
