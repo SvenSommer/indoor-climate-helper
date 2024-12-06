@@ -21,44 +21,38 @@ class DatabaseService:
         return self.db.query(Device).filter(Device.device_type == "Dehumidifier").all()
 
     def save_measurement(self, room_id, temperature, humidity):
+        """
+        Speichert eine neue Messung, wenn sie sich von der letzten unterscheidet, und berechnet die potenzielle Luftfeuchtigkeit.
+        """
         try:
-            # Prüfen, ob ein Messpunkt mit ähnlichem Zeitstempel, Temperatur und Feuchtigkeit existiert
-            existing_measurement = self.db.query(Measurement).filter(
-                Measurement.room_id == room_id,
-                func.abs(func.unix_timestamp(Measurement.timestamp) - func.unix_timestamp(datetime.utcnow())) < 5,
-                Measurement.temperature == temperature,
-                Measurement.humidity == humidity
-            ).first()
+            # Letzten gespeicherten Messpunkt für den Raum abrufen
+            last_measurement = (
+                self.db.query(Measurement)
+                .filter(Measurement.room_id == room_id)
+                .order_by(Measurement.timestamp.desc())
+                .first()
+            )
 
-            potential_humidity = None
-            if room_id != 1 and temperature is not None:
-                # Außentemperatur und -feuchtigkeit abrufen mit der Hilfsfunktion
-                outside_measurement = self.get_last_measurement_for_room(1)
+            # Nur speichern, wenn sich der neue Messpunkt unterscheidet
+            if not last_measurement or (
+                last_measurement.temperature != temperature
+                or last_measurement.humidity != humidity
+            ):
+                potential_humidity = self.calculate_potential_humidity(room_id, temperature)
 
-                outside_temp = None
-                outside_humidity = None
-                if outside_measurement:
-                    outside_temp = outside_measurement.temperature
-                    outside_humidity = outside_measurement.humidity
-                else:
-                    logging.warning("Kein Außentemperatur-Messpunkt verfügbar.")
-
-                # Potenzielle relative Luftfeuchtigkeit berechnen
-                if outside_temp is not None and outside_humidity is not None:
-                    potential_humidity = calculate_relative_humidity(outside_temp, outside_humidity, temperature)
-
-            # Wenn kein ähnlicher Messpunkt vorhanden ist, speichern
-            if not existing_measurement:
+                # Neuen Messpunkt speichern
                 new_measurement = Measurement(
                     room_id=room_id,
                     timestamp=datetime.utcnow(),
                     temperature=temperature,
                     humidity=humidity,
-                    potential_humidity=potential_humidity,  # Neuer Wert
+                    potential_humidity=potential_humidity,
                 )
                 self.db.add(new_measurement)
                 self.db.commit()
                 logging.info(f"Messung für Raum {room_id} erfolgreich gespeichert.")
+            else:
+                logging.info(f"Keine Änderung erkannt. Messpunkt nicht gespeichert.")
 
         except Exception as e:
             self.db.rollback()
@@ -67,20 +61,16 @@ class DatabaseService:
             
     def update_potential_humidity_in_historical_data_with_logging(self, t_delta=-1):
         """
-        Aktualisiert die historischen Messpunkte in der Datenbank und gibt Fortschritt zurück.
-
-        :param t_delta: Temperaturdifferenz, welche beim Lüften entsteht (Standard: -2°C)
-        :yield: Fortschrittsnachrichten als Strings
+        Aktualisiert die potenzielle Luftfeuchtigkeit in historischen Messpunkten und gibt Fortschrittsnachrichten zurück.
         """
         try:
-            # Gesamtanzahl und Zeitbereich der Außendaten loggen
-            outside_count = self.db.query(Measurement).filter_by(room_id=1).count()
-            logging.info(f"Total outside measurements available: {outside_count}")
-            first_outside = self.db.query(Measurement).filter_by(room_id=1).order_by(Measurement.timestamp.asc()).first()
-            last_outside = self.db.query(Measurement).filter_by(room_id=1).order_by(Measurement.timestamp.desc()).first()
-            logging.info(f"Outside measurements range from {first_outside.timestamp} to {last_outside.timestamp}")
+            # Gesamtanzahl der zu aktualisierenden Messpunkte abrufen
+            total_count = self.db.query(Measurement).filter(
+                Measurement.room_id != 1,
+                Measurement.temperature.isnot(None)
+            ).count()
 
-            # Messpunkte abrufen
+            yield f"Starting update for {total_count} measurements...\n"
             measurements = (
                 self.db.query(Measurement)
                 .filter(
@@ -90,37 +80,14 @@ class DatabaseService:
                 .order_by(Measurement.timestamp.asc())
             )
 
-            cached_outside_measurement = None
-            cached_timestamp = None
             updated_count = 0
-            total_count = self.db.query(Measurement).filter(
-                Measurement.room_id != 1,
-                Measurement.temperature.isnot(None)
-            ).count()
-
-            yield f"Starting update for {total_count} measurements...\n"
 
             for index, measurement in enumerate(measurements, start=1):
                 try:
-                    if (
-                        cached_outside_measurement is None or
-                        cached_timestamp is None or
-                        cached_timestamp < (measurement.timestamp - timedelta(minutes=600))
-                    ):
-                        cached_outside_measurement = self.get_nearest_measurement(1, measurement.timestamp)
-                        if cached_outside_measurement:
-                            cached_timestamp = cached_outside_measurement.timestamp
-                        else:
-                            logging.warning(f"No outside measurement found for timestamp: {measurement.timestamp}")
-                            continue
-
-                    outside_temp = cached_outside_measurement.temperature
-                    outside_humidity = cached_outside_measurement.humidity
-
-                    if outside_temp is not None and outside_humidity is not None:
-                        potential_humidity = calculate_relative_humidity(
-                            outside_temp, outside_humidity, measurement.temperature, t_delta
-                        )
+                    potential_humidity = self.calculate_potential_humidity(
+                        measurement.room_id, measurement.temperature, measurement.timestamp, t_delta
+                    )
+                    if potential_humidity is not None:
                         measurement.potential_humidity = potential_humidity
                         self.db.flush()
                         updated_count += 1
